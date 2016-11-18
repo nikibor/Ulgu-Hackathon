@@ -12,8 +12,7 @@ namespace Server.Controllers
         public ActionResult Index()
         {
             return View();
-        }
-        
+        }        
         [HttpGet]
         public string TestXml(string xml)
         {

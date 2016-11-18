@@ -20,7 +20,7 @@ namespace Server.Controllers
         {
             try
             {
-                string Connection = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\nik_borgolov\Documents\Hackathon.mdf;Integrated Security=True;Connect Timeout=30";
+                string Connection = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Server\App_Data\Database.mdf;Integrated Security=True;Connect Timeout=30";
                 SqlConnection connection = new SqlConnection(Connection);
                 connection.Open();
                 return "ВСё ХоРОшО";
