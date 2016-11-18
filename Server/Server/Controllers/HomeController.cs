@@ -6,17 +6,12 @@ using System.Web.Mvc;
 
 namespace Server.Controllers
 {
-    public class PortController : Controller
+    public class HomeController : Controller
     {
-        [HttpGet]
+        // GET: Home
         public ActionResult Index()
         {
             return View();
         }
-        
-        //public ActionResult CreateUser()
-        //{
-        //    return "asd";
-        //}
     }
 }

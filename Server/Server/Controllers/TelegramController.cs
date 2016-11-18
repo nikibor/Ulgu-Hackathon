@@ -6,17 +6,17 @@ using System.Web.Mvc;
 
 namespace Server.Controllers
 {
-    public class PortController : Controller
+    public class TelegramController : Controller
     {
-        [HttpGet]
+        // GET: Telegram
         public ActionResult Index()
         {
             return View();
         }
-        
-        //public ActionResult CreateUser()
-        //{
-        //    return "asd";
-        //}
+        [HttpGet]
+        public ActionResult Add()
+        {
+            return View();
+        }
     }
 }
