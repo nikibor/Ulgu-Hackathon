@@ -1,6 +1,7 @@
 ﻿using Server.Core;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,13 +16,25 @@ namespace Server.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult Add()
+        public string Add()
         {
-            return View();
+            try
+            {
+                string Connection = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\nik_borgolov\Documents\Hackathon.mdf;Integrated Security=True;Connect Timeout=30";
+                SqlConnection connection = new SqlConnection(Connection);
+                connection.Open();
+                return "ВСё ХоРОшО";
+            }
+            catch(Exception ex)
+            {
+                return ex.Message;
+            }
         }
         public ActionResult Add(int TelegramId, int ID, string FirstName, string Username)
         {
+            //if()
             DataBase.Querry($@"INSERT INTO TABLE TelegramUsers (IdTelegram, FirstName, Username, Id) VALUES ('{TelegramId}','{ID}','{FirstName}','{Username}')");
+
             if (DataBase.Select("SELECT * FROM TelegramUsers") == 1)
             {
                 return View("Good");

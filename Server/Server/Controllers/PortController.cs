@@ -14,7 +14,17 @@ namespace Server.Controllers
             return View();
         }
         
+        [HttpGet]
         public string TestXml(string xml)
+        {
+            if (xml == null)
+                return "Строка не передалась";
+            else if (xml.Length == 0)
+                return "Строка пустая";
+            else return "Всё ок";
+        }
+        [HttpPost]
+        public string Testxml(string xml)
         {
             if (xml == null)
                 return "Строка не передалась";
