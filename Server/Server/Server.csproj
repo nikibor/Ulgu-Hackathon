@@ -150,6 +150,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PortController.cs" />
     <Compile Include="Controllers\TelegramController.cs" />
+    <Compile Include="Core\DataBase.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -165,8 +166,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Telegram\Index.cshtml" />
+    <Content Include="Views\Telegram\Add.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Good.cshtml" />
+    <Content Include="Views\Bad.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,5 +19,12 @@ namespace Server.Controllers
         {
             return View();
         }
+        //public ActionResult Add(int TelegramId,int ID,string FirstName,string Username)
+        //{
+        //    DataBase.Querry($@"INSERT INTO TABLE TelegramUsers (IdTelegram, FirstName, Username, Id) VALUES ");
+
+        //}
+
+
     }
 }
