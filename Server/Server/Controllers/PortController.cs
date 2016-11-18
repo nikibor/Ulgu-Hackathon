@@ -14,9 +14,13 @@ namespace Server.Controllers
             return View();
         }
         
-        //public ActionResult CreateUser()
-        //{
-        //    return "asd";
-        //}
+        public string TestXml(string xml)
+        {
+            if (xml == null)
+                return "Строка не передалась";
+            else if (xml.Length == 0)
+                return "Строка пустая";
+            else return "Всё ок";
+        }
     }
 }

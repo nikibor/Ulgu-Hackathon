@@ -19,12 +19,14 @@ namespace Server.Controllers
         {
             return View();
         }
-        //public ActionResult Add(int TelegramId,int ID,string FirstName,string Username)
-        //{
-        //    DataBase.Querry($@"INSERT INTO TABLE TelegramUsers (IdTelegram, FirstName, Username, Id) VALUES ");
-
-        //}
-
-
+        public ActionResult Add(int TelegramId, int ID, string FirstName, string Username)
+        {
+            DataBase.Querry($@"INSERT INTO TABLE TelegramUsers (IdTelegram, FirstName, Username, Id) VALUES ('{TelegramId}','{ID}','{FirstName}','{Username}')");
+            if (DataBase.Select("SELECT * FROM TelegramUsers") == 1)
+            {
+                return View("Good");
+            }
+            else return View("Bad");
+        }
     }
 }

@@ -23,6 +23,20 @@ namespace Server.Core
                 connection.Close();
             }
         }
-
+        public static int Select(string querry)
+        {
+            SqlConnection connection = new SqlConnection(Connection);
+            try
+            {
+                SqlCommand command = new SqlCommand(querry, connection);
+                var a = command.ExecuteNonQuery();
+                return a;
+            }
+            catch (Exception)
+            {
+                connection.Close();
+                return -1;
+            }
+        }
     }
 }
