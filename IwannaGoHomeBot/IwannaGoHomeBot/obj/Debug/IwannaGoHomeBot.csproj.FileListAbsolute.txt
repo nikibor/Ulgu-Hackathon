@@ -1,0 +1,12 @@
+c:\users\vladimir\documents\visual studio 2015\Projects\IwannaGoHomeBot\IwannaGoHomeBot\bin\Debug\IwannaGoHomeBot.exe.config
+c:\users\vladimir\documents\visual studio 2015\Projects\IwannaGoHomeBot\IwannaGoHomeBot\bin\Debug\IwannaGoHomeBot.exe
+c:\users\vladimir\documents\visual studio 2015\Projects\IwannaGoHomeBot\IwannaGoHomeBot\bin\Debug\IwannaGoHomeBot.pdb
+c:\users\vladimir\documents\visual studio 2015\Projects\IwannaGoHomeBot\IwannaGoHomeBot\obj\Debug\IwannaGoHomeBot.csprojResolveAssemblyReference.cache
+c:\users\vladimir\documents\visual studio 2015\Projects\IwannaGoHomeBot\IwannaGoHomeBot\obj\Debug\IwannaGoHomeBot.exe
+c:\users\vladimir\documents\visual studio 2015\Projects\IwannaGoHomeBot\IwannaGoHomeBot\obj\Debug\IwannaGoHomeBot.pdb
+c:\users\vladimir\documents\visual studio 2015\Projects\IwannaGoHomeBot\IwannaGoHomeBot\bin\Debug\Newtonsoft.Json.dll
+c:\users\vladimir\documents\visual studio 2015\Projects\IwannaGoHomeBot\IwannaGoHomeBot\bin\Debug\System.Net.Http.Formatting.dll
+c:\users\vladimir\documents\visual studio 2015\Projects\IwannaGoHomeBot\IwannaGoHomeBot\bin\Debug\Telegram.Bot.dll
+c:\users\vladimir\documents\visual studio 2015\Projects\IwannaGoHomeBot\IwannaGoHomeBot\bin\Debug\Newtonsoft.Json.xml
+c:\users\vladimir\documents\visual studio 2015\Projects\IwannaGoHomeBot\IwannaGoHomeBot\bin\Debug\System.Net.Http.Formatting.xml
+c:\users\vladimir\documents\visual studio 2015\Projects\IwannaGoHomeBot\IwannaGoHomeBot\bin\Debug\Telegram.Bot.xml
