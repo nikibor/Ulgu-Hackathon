@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,24 +27,19 @@ namespace Server.Controllers
             else return "Всё ок";
         }
         [HttpPost]
-        public string Testxml(string xml)
+        public string Testxml()
         {
-            if (xml == null)
-                return "Строка не передалась";
-            else if (xml.Length == 0)
-                return "Строка пустая";
-            else return "Всё ок";
+            string value;
+            using (System.IO.StreamReader SR = new System.IO.StreamReader(Request.InputStream))
+            {
+                value = SR.ReadToEnd();
+            }
+            return value;
         }
         //[HttpPost]
-        //public string TakeXml()
+        //public HttpResponse TakeXml()
         //{
-        //    string responseXml = "";
-        //    HttpWebResponse response = new HttpWebResponse();
-        //    using (StreamReader stream = new StreamReader(response.GetResponseStream(), encoding: code))
-        //    {
-        //        responseXml = stream.ReadToEnd();
-        //    }
-        //    return responseXml;
+            
         //}
     }
 }
