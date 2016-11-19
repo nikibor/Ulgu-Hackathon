@@ -22,6 +22,8 @@ namespace Server.Controllers
             {
                 string Connection = @"Server=tcp:nikitaborgolov.database.windows.net,1433;Initial Catalog=DataBase;Persist Security Info=False;User ID=nborgolov96;Password=Nikita207968811;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
                 SqlConnection connection = new SqlConnection(Connection);
+                SqlCommand command = new SqlCommand("INSERT INTO [dbo].[Users] ([Id], [Name], [Adress], [TelegramId]) VALUES (2, 'Nikita', 'Borgolov', 2)");
+                
                 connection.Open();
                 return "ВСё ХоРОшО";
             }

@@ -8,7 +8,7 @@ namespace Server.Core
 {
     public class DataBase
     {
-        private static string Connection = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\nik_borgolov\Documents\Hackathon.mdf;Integrated Security=True;Connect Timeout=30";
+        private static string Connection = @"Server=tcp:nikitaborgolov.database.windows.net,1433;Initial Catalog=DataBase;Persist Security Info=False;User ID=nborgolov96;Password=Nikita207968811;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public static void Querry(string querry)
         {
             SqlConnection connection = new SqlConnection(Connection);
