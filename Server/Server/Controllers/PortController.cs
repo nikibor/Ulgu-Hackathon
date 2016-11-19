@@ -27,7 +27,8 @@ namespace Server.Controllers
                     result = (MessageToServer)serializer.Deserialize(reader);
                 }
                 GeoLoactionYandex yandex = new GeoLoactionYandex(result.Street, result.NumberHouse);
-                DataBase.Querry($"INSERT INTO [dbo].[Shutle] ([Id], [Name], [Adress], [Date], [Xpoint], [Ypoint]) VALUES ({DataBase.ID++}, '{result.First_name}', '{result.Street} {result.NumberHouse}', '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}', '{yandex.XPoint}', '{yandex.YPoint}')");
+                DataBase.Querry($"INSERT INTO [dbo].[Shutle] ([Id], [Name], [Adress], [Date], [Xpoint], [Ypoint]) VALUES ({DataBase.ID}, '{result.First_name}', '{result.Street} {result.NumberHouse}', '{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}', '{yandex.XPoint}', '{yandex.YPoint}')");
+                DataBase.ID++;
                 return $"{result.First_name}, Ваш запрос обработан и добавлен";
             }
             catch(Exception ex)
