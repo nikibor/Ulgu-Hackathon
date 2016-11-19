@@ -19,13 +19,8 @@ namespace Server.Controllers
         public string Add()
         {
             try
-            {
-                string Connection = @"Server=tcp:nikitaborgolov.database.windows.net,1433;Initial Catalog=DataBase;Persist Security Info=False;User ID=nborgolov96;Password=Nikita207968811;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-                SqlConnection connection = new SqlConnection(Connection);
-                connection.Open();
-                SqlCommand command = new SqlCommand("INSERT INTO [dbo].[Users] ([Id], [Name], [Adress], [TelegramId]) VALUES (20, 'Nikita', 'Borgolov', 2)", connection);
-                command.ExecuteNonQuery();
-                connection.Close();
+            {                
+                //DataBase.Querry("INSERT INTO [dbo].[Users] ([Id], [Name], [Adress], [TelegramId]) VALUES (26, 'Nikita', 'Borgolov', 2)");
                 return "ВСё ХоРОшО";
             }
             catch(Exception ex)

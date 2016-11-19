@@ -16,6 +16,8 @@ namespace Server.Core
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(querry, connection);
+                command.ExecuteNonQuery();
+                command.Dispose();
                 connection.Close();
             }
             catch (Exception)

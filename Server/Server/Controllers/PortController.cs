@@ -1,4 +1,5 @@
-﻿using Server.Models;
+﻿using Server.Core;
+using Server.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Serialization;
 
 namespace Server.Controllers
 {
@@ -27,14 +29,23 @@ namespace Server.Controllers
             else return "Всё ок";
         }
         [HttpPost]
-        public string Testxml()
+        public string TakeTelegramData()
         {
-            string value;
-            using (System.IO.StreamReader SR = new System.IO.StreamReader(Request.InputStream))
+            try
             {
-                value = SR.ReadToEnd();
+                string xml = HttpProtocol.TakePOST(Request);
+                var serializer = new XmlSerializer(typeof(MessageToServer));
+                MessageToServer result;
+                using (TextReader reader = new StringReader(xml))
+                {
+                    result = (MessageToServer)serializer.Deserialize(reader);
+                }
+                return result.First_name + '\n' + result.Street;
             }
-            return value;
+            catch(Exception ex)
+            {
+                return ex.Message;
+            }
         }        
     }
 }
