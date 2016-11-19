@@ -1,4 +1,5 @@
-﻿using SeoToolsMainApp.Core;
+﻿using Newtonsoft.Json.Linq;
+using SeoToolsMainApp.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,25 +19,18 @@ namespace Server.Core
         {
             Street = street;
             NumOfHouse = numOfHouse;
-            string yandexServer = "https://geocode-maps.yandex.ru/1.x/?geocode=";
+            string yandexServer = "https://geocode-maps.yandex.ru/1.x/?format=json&geocode=";
             yandexServer = $"{yandexServer}Россия+Ульяновск+{Street}+{NumOfHouse}";
             TakePoints(HttpProtocol.TakeData(yandexServer, "GET", Encoding.UTF8));
         }
-        public void TakePoints(string responseXml)
+        public void TakePoints(string json)
         {
-            string Points = "";
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(responseXml);
-            if (doc.DocumentElement != null)
-                foreach (XmlNode noda in doc.DocumentElement)
-                {
-                    XmlNodeList xnList = doc.SelectNodes("/featureMember/Point ");
-                    foreach (XmlNode xn in xnList)
-                    {
-                        Points = xn["pos"]?.InnerText;
-                    }
-                }
-
+            string res = "";
+            JObject jsonFile = JObject.Parse(json);
+            res = jsonFile["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"]["Point"]["pos"].ToString();
+            var points = res.Split(' ');
+            XPoint = points[1];
+            YPoint = points[2];
         }
     }
 }
