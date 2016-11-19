@@ -35,11 +35,6 @@ namespace Server.Controllers
                 value = SR.ReadToEnd();
             }
             return value;
-        }
-        //[HttpPost]
-        //public HttpResponse TakeXml()
-        //{
-            
-        //}
+        }        
     }
 }
