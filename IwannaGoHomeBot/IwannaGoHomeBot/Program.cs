@@ -22,14 +22,32 @@ namespace IwannaGoHomeBot
             thread.IsBackground = true;
             thread.Start();
             Console.ReadKey();
-            BusAlgoritm ba = new BusAlgoritm();
-            ba.FindBusForNewUser();
+            //BusAlgoritm ba = new BusAlgoritm();
+            //ba.FindBusForNewUser();
         }
 
         private static void Tr_responseRecived(object sender, ParametrResponse e)
         {
             Methods met = new Methods(Token);
             Console.WriteLine("UserName-{0} FirstName- {1} SecondName-{2}:{3} chatId{4}", e.username,e.first_name,e.last_name, e.message, e.chatID);
+            if (e.chatID == "177872684")//переписать потом
+            {
+                BusAlgoritm ba = new BusAlgoritm();
+                ba.FindBusForNewUser();
+                int temp = 1;
+                string url = "https://static-maps.yandex.ru/1.x/?ll=48.288273,54.284022&size=450,450&z=9&l=map&pt=";
+                ba.ListBus[0].Marshrutpoints.RemoveAt(2);
+                foreach (var poin in ba.ListBus[0].Marshrutpoints)
+                {                
+                    url+= poin.x.ToString().Replace(',','.') + "," + poin.y.ToString().Replace(',', '.') + "," + "pmwtm" + temp.ToString() + "~";
+                    temp++;
+                }
+                url=url.Remove(url.Length - 1);
+                met.SendMessage("Вы водитель автобуса №" + ba.ListBus[0].NumBus + ", ваш маршрут проложен в " + ba.ListBus[0].area.nameArea, Convert.ToInt32(e.chatID));
+                //"https://static-maps.yandex.ru/1.x/?ll=48.288273,54.284022&size=450,450&z=9&l=map&pt=48.324314,54.256019,pmwtm1~48.288273,54.284022,pmwtm99"
+                met.SendPhotoLink(Convert.ToInt32(e.chatID),url );
+                return;
+            }
             met.SendMessageToServer(e.username, e.first_name, e.last_name, e.message, e.chatID);
             //met.SendMessage("Я работаю!", Convert.ToInt32(e.chatID));
             //met.SendSticker(Convert.ToInt32(e.chatID), "BQADAgADHAADyIsGAAFzjQavel2uswI");

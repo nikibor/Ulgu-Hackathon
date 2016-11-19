@@ -9,24 +9,25 @@ namespace IwannaGoHomeBot
     class Bus
     {
         public UlyanovskAreas area;
-        public Bus(int NumPlaces, UlyanovskAreas area)
+        public Bus(string NumBus,int NumPlaces, UlyanovskAreas area)
         {
+            this.NumBus = NumBus;
             this.NumPlaces = NumPlaces;
             this.area = area;
         }
-        string NumBus;
+        public string NumBus;
         public bool HavePlaces = true;
         int NumPlaces;
-        private List<string> adresses = new List<string>();
-        public void AddPassanger(string address)
+        public List<Point> Marshrutpoints = new List<Point>();
+        public void AddPassanger(string address,double x,double y)
         {
             if(address.Length==NumPlaces)
             {
                 HavePlaces = false;
             }
-            if (adresses.Count <= NumPlaces)
+            if (Marshrutpoints.Count <= NumPlaces)
             {
-                adresses.Add(address);
+                Marshrutpoints.Add(new Point(x,y,address));
             }
         }
     }

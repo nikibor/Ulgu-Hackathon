@@ -40,9 +40,21 @@ namespace IwannaGoHomeBot
                 webClient.UploadValues("https://api.telegram.org/bot" + Token + "/sendSticker", pars);
             }
         }
+        public void SendPhotoLink(int ChatID, string linkToPhoto, string caption = "")
+        {
+            using (WebClient webClient = new WebClient())
+            {
+                NameValueCollection pars = new NameValueCollection();
+                pars.Add("chat_id", ChatID.ToString());
+                pars.Add("photo", linkToPhoto);
+                pars.Add("caption", caption);
+                webClient.UploadValues(link + Token + "/sendPhoto", pars);
+            }
+        }
+
         #endregion
 
-        #region ServerCooperation
+            #region ServerCooperation
         public void SendMessageToServer(string username, string first_name, string last_name, string message, string chatId)
         {
             MessageToServer ServMes = new MessageToServer();

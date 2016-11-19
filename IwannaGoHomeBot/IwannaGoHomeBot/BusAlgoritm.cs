@@ -11,11 +11,11 @@ namespace IwannaGoHomeBot
         ListUlyanovskAreas listAreas = new ListUlyanovskAreas();
         public BusAlgoritm()
         {
-            ListBus.Add(new Bus(6,listAreas.listAreas.Find(x=>x.nameArea=="Железнодорожный район")));
-            ListBus.Add(new Bus(6, listAreas.listAreas.Find(x => x.nameArea == "Ленинский район")));
-            ListBus.Add(new Bus(6, listAreas.listAreas.Find(x => x.nameArea == "Новый город")));
-            ListBus.Add(new Bus(6, listAreas.listAreas.Find(x => x.nameArea == "Засвияжский район")));
-            ListBus.Add(new Bus(6, listAreas.listAreas.Find(x => x.nameArea == "Заволжский район")));
+            ListBus.Add(new Bus("1",6,listAreas.listAreas.Find(x=>x.nameArea=="Железнодорожный район")));
+            ListBus.Add(new Bus("2",6, listAreas.listAreas.Find(x => x.nameArea == "Ленинский район")));
+            ListBus.Add(new Bus("3",6, listAreas.listAreas.Find(x => x.nameArea == "Новый город")));
+            ListBus.Add(new Bus("4",6, listAreas.listAreas.Find(x => x.nameArea == "Засвияжский район")));
+            ListBus.Add(new Bus("5",6, listAreas.listAreas.Find(x => x.nameArea == "Заволжский район")));
 
             points.Add(new Point(48.324314,54.256019,"ВАРЕЙКИСА 6"));
             points.Add(new Point(48.288273, 54.284022,"кузоватовская 45"));
@@ -34,13 +34,33 @@ namespace IwannaGoHomeBot
             points.Add(new Point(48.394293, 54.329699, "островского 50"));
             points.Add(new Point(48.363651, 54.287475, "локомотивная 13"));
             points.Add(new Point(48.313193, 54.289945, "доватора 32"));
+            points.Add(new Point(48.387627, 54.312894, "ленина 100"));
+            points.Add(new Point(48.352215, 54.350275, "репина 8"));
+            points.Add(new Point(48.315465, 54.299183, "октябрьская 8"));
+            points.Add(new Point(48.396682, 54.318819, "гончарова 21а / 10"));
+            points.Add(new Point(48.355925, 54.306475, "московское шоссе 102"));
+            points.Add(new Point(48.381042, 54.352951, "любови шевцовой 54а"));
+            points.Add(new Point(48.327018, 54.261183, "ул героев свири 10"));
+            points.Add(new Point(48.36808, 54.31707, "аблукова 71"));
+            points.Add(new Point(48.582355, 54.393141, "врача сурова 37"));
+            points.Add(new Point(48.541023, 54.344638, "тельмана 30"));
+            points.Add(new Point(48.47612 ,54.32124, "заречная 3"));
+            points.Add(new Point(48.395559, 54.320153, "молочный переулок 4"));
+            points.Add(new Point(48.377341, 54.299756, "пушкинская"));
             points.Add(new Point(48.385705, 54.306665, "минаева 42"));
+            points.Add(new Point(48.606636, 54.380972, "академика филатова 12"));
+            points.Add(new Point(48.607678, 54.385938, "проспект ленинского комсомола 5"));
+            points.Add(new Point(48.48442, 54.328964, "краснопролетарская 12"));
+            points.Add(new Point(48.318574, 54.252558, "автомбилистов 1"));
+            points.Add(new Point(48.344966, 54.276605, "первомайская 9"));
+            points.Add(new Point(48.306653, 54.286461, "богдана хмельницкого 30"));
         }
         List<Point> points = new List<Point>();     
-        List<Bus> ListBus = new List<Bus>();
+        public List<Bus> ListBus = new List<Bus>();
 
         public void FindBusForNewUser()
         {
+            int NumBus = 6;
             for(int i=0;i<points.Count;i++)
             {
                 foreach(var area in listAreas.listAreas)
@@ -49,15 +69,16 @@ namespace IwannaGoHomeBot
                     {
                         if(ListBus.Find(x => x.area == area || x.HavePlaces == true)==null)
                         {
-                            ListBus.Add(new Bus(6, new ListUlyanovskAreas().listAreas.Find(x => x == area)));
+                            ListBus.Add(new Bus(6.ToString(),6, new ListUlyanovskAreas().listAreas.Find(x => x == area)));
+                            NumBus++;
                         }
-                        ListBus.Find(x => x.area == area||x.HavePlaces==true).AddPassanger(points[i].addres);
-                        Console.WriteLine("Автобус следует в -{0} добавлен пассажир -{1}", area.nameArea, points[i].addres);
+                        ListBus.Find(x => x.area == area||x.HavePlaces==true).AddPassanger(points[i].addres,points[i].x,points[i].y);
+                        //Console.WriteLine("Автобус следует в -{0} добавлен пассажир -{1}", area.nameArea, points[i].addres);
                         break;
                     }
                 }
             }
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 
