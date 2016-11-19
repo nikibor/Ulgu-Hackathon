@@ -30,7 +30,7 @@ namespace Server.Core
             res = jsonFile["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"]["Point"]["pos"].ToString();
             var points = res.Split(' ');
             XPoint = points[1];
-            YPoint = points[2];
+            YPoint = points[0];
         }
     }
 }
