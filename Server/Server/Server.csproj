@@ -151,8 +151,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PortController.cs" />
-    <Compile Include="Controllers\TelegramController.cs" />
     <Compile Include="Core\DataBase.cs" />
+    <Compile Include="Core\GeoLoactionYandex.cs" />
     <Compile Include="Core\HttpProtocol.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

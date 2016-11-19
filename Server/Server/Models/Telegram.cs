@@ -21,5 +21,6 @@ namespace Server.Models
         public string NumberHouse { get; set; }
         [XmlElement("ChatID")]
         public string ChatID { get; set; }
+            
     }
 }
