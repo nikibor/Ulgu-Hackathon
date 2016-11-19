@@ -15,15 +15,15 @@ namespace IwannaGoHomeBot
         static public string Token= "239159484:AAFJYqTigujbYaw47Dm0x22PUYQbrIJqC68";
         static void Main(string[] args)
         {
-            //TelegramRequest tr = new TelegramRequest(Token);
-            //tr.ResponseRecived += Tr_responseRecived;
-            //tr.GetUpdates();
-            //Thread thread = new Thread(tr.GetUpdates);
-            //thread.IsBackground = true;
-            //thread.Start();
-            //Console.ReadKey();
-            PoiskVGlubinu poisk = new PoiskVGlubinu();
-            poisk.startFind();
+            TelegramRequest tr = new TelegramRequest(Token);
+            tr.ResponseRecived += Tr_responseRecived;
+            tr.GetUpdates();
+            Thread thread = new Thread(tr.GetUpdates);
+            thread.IsBackground = true;
+            thread.Start();
+            Console.ReadKey();
+            BusAlgoritm ba = new BusAlgoritm();
+            ba.FindBusForNewUser();
         }
 
         private static void Tr_responseRecived(object sender, ParametrResponse e)
@@ -31,8 +31,8 @@ namespace IwannaGoHomeBot
             Methods met = new Methods(Token);
             Console.WriteLine("UserName-{0} FirstName- {1} SecondName-{2}:{3} chatId{4}", e.username,e.first_name,e.last_name, e.message, e.chatID);
             met.SendMessageToServer(e.username, e.first_name, e.last_name, e.message, e.chatID);
-            met.SendMessage("Я работаю!", Convert.ToInt32(e.chatID));
-            met.SendSticker(Convert.ToInt32(e.chatID), "BQADAgADHAADyIsGAAFzjQavel2uswI");
+            //met.SendMessage("Я работаю!", Convert.ToInt32(e.chatID));
+            //met.SendSticker(Convert.ToInt32(e.chatID), "BQADAgADHAADyIsGAAFzjQavel2uswI");
 
         }
         public delegate void Response(object sender, ParametrResponse e);

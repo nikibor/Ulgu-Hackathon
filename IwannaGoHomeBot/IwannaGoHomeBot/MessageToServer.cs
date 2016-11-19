@@ -1,32 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
+using System.Xml.Serialization;
 
 namespace IwannaGoHomeBot
 {
+    [XmlRoot("MessageToServer")]
+    [Serializable]
     public class MessageToServer
     {
-        private string username;
-        private string first_name;
-        private string last_name;
-        private string street;
-        private string numberHouse;
-        private string chatID;
-
-        public string UserName
-        { get; set; }
-        public string First_name
-        { get; set; }
-        public string Last_name
-        { get; set; }
-        public string Street
-        { get; set; }
-        public string NumberHouse
-        { get; set; }
-        public string ChatID
-        { get; set; }
-
+        public MessageToServer()
+        { }
+        [XmlElement("UserName")]
+        public string UserName { get; set; }
+        [XmlElement("First_name")]
+        public string First_name { get; set; }
+        [XmlElement("Last_name")]
+        public string Last_name { get; set; }
+        [XmlElement("Street")]
+        public string Street { get; set; }
+        [XmlElement("NumberHouse")]
+        public string NumberHouse { get; set; }
+        [XmlElement("ChatID")]
+        public string ChatID { get; set; }
     }
 }

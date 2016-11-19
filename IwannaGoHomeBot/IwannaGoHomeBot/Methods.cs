@@ -50,14 +50,18 @@ namespace IwannaGoHomeBot
             ServMes.First_name = first_name;
             ServMes.Last_name = last_name;
             ServMes.ChatID = chatId;
-            Parse(ref ServMes, message);
-            string url= "http://iwannagohom.azurewebsites.net/Port/TestXml";
+            if(!Parse(ref ServMes, message, chatId))
+            {
+                return;
+            }
+            string url= "http://iwannagohom.azurewebsites.net/Port/TakeTelegramData";
             XmlSerializer serializer = new XmlSerializer(typeof(MessageToServer));
             StringWriter writer = new StringWriter();
             serializer.Serialize(writer, ServMes);
             string serializedXML = writer.ToString();
             var answer=POST(url, serializedXML);
             SendMessage(answer, Convert.ToInt32(chatId));
+            SendSticker(Convert.ToInt32(chatId), "BQADAgADHAADyIsGAAFzjQavel2uswI");
             //try
             //{
             //    string responseXml;
@@ -69,11 +73,11 @@ namespace IwannaGoHomeBot
             //        responseXml = stream.ReadToEnd();
             //        Console.WriteLine(responseXml);
             //    }
-                
+
             //}
             //catch (Exception)
             //{
-                
+
             //}
 
         }
@@ -129,21 +133,41 @@ namespace IwannaGoHomeBot
             return Out;
         }
 
-        public void Parse(ref MessageToServer ServMes,string message)//Парсит сообщение для бота
+        public bool Parse(ref MessageToServer ServMes,string message,string chatID)//Парсит сообщение для бота
         {
-
+            if(message==null)
+            {
+                SendMessage("Пожалуйста введите данные в формате: Улица <Название> Дом <Номер дома>",Convert.ToInt32(chatID));
+                SendSticker(Convert.ToInt32(chatID), "BQADAgADYwADyJsDAAHDfKTQ3nEFZwI");
+                return false;
+            }
             if (message.Contains("Улица") || message.Contains("улица"))
             {
                 if (message.Contains("Дом"))
                 {
                     ServMes.Street = message.Substring(5, message.IndexOfAny("Дом".ToArray())-5).Trim("[-.?!)(,:]".ToArray());
                     ServMes.NumberHouse = message.Substring(message.IndexOfAny("Дом".ToArray())+1).Trim("[-.?!)(,:]".ToArray());
+                    return true;
                 }
                 if (message.Contains("дом"))
                 {
                     ServMes.Street = message.Substring(5, message.IndexOfAny("дом".ToArray())-5).Trim(" [-.?!)(,:]".ToArray());
                     ServMes.NumberHouse = message.Substring(message.LastIndexOfAny("дом".ToArray())+1).Trim(" [-.?!)(,:]".ToArray());
+                    return true;
                 }
+                else
+                {
+                    SendMessage("Пожалуйста введите данные в формате: Улица <Название> Дом <Номер дома>", Convert.ToInt32(chatID));
+                    SendSticker(Convert.ToInt32(chatID), "BQADAgADYwADyJsDAAHDfKTQ3nEFZwI");
+                    return false;
+                }
+
+            }
+            else
+            {
+                SendMessage("Пожалуйста введите данные в формате: Улица <Название> Дом <Номер дома>", Convert.ToInt32(chatID));
+                SendSticker(Convert.ToInt32(chatID), "BQADAgADYwADyJsDAAHDfKTQ3nEFZwI");
+                return false;
             }
         }
         #endregion

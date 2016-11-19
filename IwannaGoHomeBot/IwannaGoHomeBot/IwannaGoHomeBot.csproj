@@ -56,12 +56,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bus.cs" />
     <Compile Include="BusAlgoritm.cs" />
     <Compile Include="MessageToServer.cs" />
     <Compile Include="Methods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleJSON.cs" />
+    <Compile Include="UlyanovskAreas.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
