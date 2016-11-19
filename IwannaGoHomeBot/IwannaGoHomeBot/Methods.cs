@@ -51,73 +51,81 @@ namespace IwannaGoHomeBot
             ServMes.Last_name = last_name;
             ServMes.ChatID = chatId;
             Parse(ref ServMes, message);
-            string url= "http://iwannagohom.azurewebsites.net/Port/TestXml?xml=";
-            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            //if (response.StatusCode == HttpStatusCode.OK)
-            //{
-            //    Console.WriteLine("Всё норм.");
-            //}
-            //else if (response.StatusCode == HttpStatusCode.NotFound)
-            //{
-            //    Console.WriteLine("Такой страницы нет.");
-            //}
-            //response.Close();
-            GET(url, "rdyeyer");
-            try
-            {
-                string responseXml;
-                var request = (HttpWebRequest)WebRequest.Create(url);
-                request.Method = "GET";
-                var response = (HttpWebResponse)request.GetResponse();
-                using (StreamReader stream = new StreamReader(response.GetResponseStream()))
-                {
-                    responseXml = stream.ReadToEnd();
-                }
-                
-            }
-            catch (Exception)
-            {
-                
-            }
-
-            //    XmlSerializer serializer = new XmlSerializer(typeof(MessageToServer)); 
-            //    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            //    request.Method = "GET";
-            //    request.ContentType = "text/xml";
-            //StreamWriter sw = new StreamWriter(request.GetRequestStream());
-            //sw.Write("sdgsdgwer");
-            //sw.Close();
-            //XmlTextWriter writer = new XmlTextWriter(request.GetRequestStream(), Encoding.UTF8);
-            //serializer.Serialize(writer, ServMes);
-            //writer.Close();
-
+            string url= "http://iwannagohom.azurewebsites.net/Port/TestXml";
+            XmlSerializer serializer = new XmlSerializer(typeof(MessageToServer));
+            StringWriter writer = new StringWriter();
+            serializer.Serialize(writer, ServMes);
+            string serializedXML = writer.ToString();
+            var answer=POST(url, serializedXML);
+            SendMessage(answer, Convert.ToInt32(chatId));
             //try
             //{
             //    string responseXml;
-            //    var request = (HttpWebRequest)WebRequest.Create(url);
-            //    request.Method = method;
+            //    var request = (HttpWebRequest)WebRequest.Create(url+ serializedXML);
+            //    request.Method = "GET";
             //    var response = (HttpWebResponse)request.GetResponse();
-            //    using (StreamReader stream = new StreamReader(response.GetResponseStream(), encoding: code))
+            //    using (StreamReader stream = new StreamReader(response.GetResponseStream()))
             //    {
             //        responseXml = stream.ReadToEnd();
+            //        Console.WriteLine(responseXml);
             //    }
-            //    return responseXml;
-            ////}
+                
+            //}
             //catch (Exception)
             //{
-            //    return null;
+                
             //}
 
         }
-        private string GET(string Url, string Data)
+        private string GET(string Url, string Data)//get запрос к серваку
         {
-            WebRequest req = WebRequest.Create(Url + "?xml=" + Data);
-            WebResponse resp = req.GetResponse();
-            Stream stream = resp.GetResponseStream();
-            StreamReader sr = new StreamReader(stream);
-            string Out = sr.ReadToEnd();
-            sr.Close();
+            try
+            {
+                WebRequest req = WebRequest.Create(Url + "?xml=" + Data);
+                WebResponse resp = req.GetResponse();
+                Stream stream = resp.GetResponseStream();
+                StreamReader sr = new StreamReader(stream);
+                string Out = sr.ReadToEnd();
+                sr.Close();
+                return Out;
+            }
+            catch (WebException webex)
+            {
+                return "Сорян, сервер упал";
+                WebResponse errResp = webex.Response;
+                using (Stream respStream = errResp.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(respStream);
+                    string text = reader.ReadToEnd();
+                    
+                }
+            }
+        }
+
+        private static string POST(string Url, string Data)
+        {
+            System.Net.WebRequest req = System.Net.WebRequest.Create(Url);
+            req.Method = "POST";
+            req.Timeout = 100000;
+            req.ContentType = "application/x-www-form-urlencoded";
+            byte[] sentData = Encoding.GetEncoding(1251).GetBytes(Data);
+            req.ContentLength = sentData.Length;
+            System.IO.Stream sendStream = req.GetRequestStream();
+            sendStream.Write(sentData, 0, sentData.Length);
+            sendStream.Close();
+            System.Net.WebResponse res = req.GetResponse();
+            System.IO.Stream ReceiveStream = res.GetResponseStream();
+            System.IO.StreamReader sr = new System.IO.StreamReader(ReceiveStream, Encoding.UTF8);
+            //Кодировка указывается в зависимости от кодировки ответа сервера
+            Char[] read = new Char[256];
+            int count = sr.Read(read, 0, 256);
+            string Out = String.Empty;
+            while (count > 0)
+            {
+                String str = new String(read, 0, count);
+                Out += str;
+                count = sr.Read(read, 0, 256);
+            }
             return Out;
         }
 
